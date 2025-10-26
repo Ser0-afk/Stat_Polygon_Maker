@@ -1,10 +1,11 @@
-# Stat-Polygon-Maker
-Source code for a custom stat polygon maker, like the ones you find in many videogames or role playing stat blocks.
+# Stat Polygon Maker
+A simple and customizable custom stat polygon maker, like the ones you find in many videogames or role playing stat blocks.
 
-For now it needs to be imported in the Godot engine to work.
-You can find the configs in Image.gd and the saved image in the output folder.
-It can only save one image at a time, so if you want to save multiples you need to move them each time to another folder.
+It just needs the .exe file, but you can also find the source code in the folder (it's a Godot project).
+You can edit the config file and find the saved images in AppData\Roaming\Godot\app_userdata\Stat Polygon Maker
 
-I plan to make it able to save multiple images, have a standalone config file and eventualy release a exe independent from the engine.
+To chenge the colors, use the format Color(red, green, blue, alpha) with values between 0 and 1, where the last value is the transparency (set 0 to have a color be fully transparent).
+R is the radius of the circumscribing circle.
+AA is for antialiasing in the drawn lines.
 
 Have a good one.
