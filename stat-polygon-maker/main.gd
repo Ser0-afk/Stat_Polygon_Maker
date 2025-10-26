@@ -1,17 +1,23 @@
 extends Control
 
 
-const OUTPUT_PATH = "output/"
+var OUTPUT_PATH
 
-const setter_scene = preload("res://Setter.tscn")
+const setter_scene = preload("uid://etfxgbrrmww8")
 
-@onready var N : int = %Image.STARTING_N
+var N := 6
 var values := []
 var texts := []
 
-
 func _ready() -> void:
-	%SubViewport.size = %Image.IMG_SIZE
+	##GUI controls
+	$".".size = get_viewport().size
+	$Node2D/MarginContainer.custom_minimum_size.y = $".".size.y
+	%SubViewport.size = ConfigHandler.load_settings("Measures")["IMG_SIZE"]
+	
+	OUTPUT_PATH = ConfigHandler.load_settings("Others")["OUTPUT_PATH"]
+	N = ConfigHandler.load_settings("Others")["STARTING_N"]
+	%Variables.modulate = ConfigHandler.load_settings("Colors")["WINDOW_TEXT"]
 	
 	for i in N:
 		var new_sel = setter_scene.instantiate()
@@ -20,6 +26,9 @@ func _ready() -> void:
 	
 	_on_draw_pressed()
 
+func _draw() -> void:
+	draw_rect(Rect2(Vector2(0,0), get_viewport().size), 
+				ConfigHandler.load_settings("Colors")["WINDOW_BG"])
 
 func _on_draw_pressed() -> void:
 	
@@ -58,11 +67,9 @@ func _on_save_pressed() -> void:
 	var image = %SubViewport.get_texture().get_image()
 	
 	##checks if folder exists and creates it if not
-	var dir_path:= OUTPUT_PATH.get_base_dir()
-	if not DirAccess.dir_exists_absolute(dir_path):
-		DirAccess.make_dir_recursive_absolute(dir_path)
+	var path = globals.create_path(OUTPUT_PATH, 1)
 	
-	image.save_png(OUTPUT_PATH+ "image.png")
+	globals.save_png(image, path, $Node2D/MarginContainer/BoxContainer/Img_name.text)
 
 
 ##Toggles

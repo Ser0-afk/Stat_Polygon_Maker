@@ -17,8 +17,14 @@ config/features=PackedStringArray("4.4", "Forward Plus")
 [autoload]
 
 globals="*res://globals.gd"
+ConfigHandler="*res://ConfigHandler.gd"
 
 [display]
 
 window/size/viewport_width=1600
 window/size/viewport_height=900
+window/stretch/mode="viewport"
+
+[rendering]
+
+viewport/transparent_background=true
