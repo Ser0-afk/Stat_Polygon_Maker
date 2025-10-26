@@ -1,0 +1,115 @@
+[gd_scene load_steps=4 format=3 uid="uid://ch2uhnr0fs8ab"]
+
+[ext_resource type="Script" uid="uid://btgms3t6kk45e" path="res://main.gd" id="1_ig7tw"]
+[ext_resource type="PackedScene" uid="uid://jaj1uxccqu6a" path="res://Image.tscn" id="2_0xm2m"]
+
+[sub_resource type="Theme" id="Theme_0xm2m"]
+default_font_size = 32
+
+[node name="Main" type="MarginContainer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_vertical = 3
+theme_override_constants/margin_left = 50
+theme_override_constants/margin_right = 50
+script = ExtResource("1_ig7tw")
+
+[node name="Node2D" type="HBoxContainer" parent="."]
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="Node2D"]
+layout_mode = 2
+theme_override_constants/margin_top = 50
+theme_override_constants/margin_right = 50
+theme_override_constants/margin_bottom = 50
+
+[node name="BoxContainer" type="VBoxContainer" parent="Node2D/MarginContainer"]
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = SubResource("Theme_0xm2m")
+
+[node name="A" type="HBoxContainer" parent="Node2D/MarginContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Node2D/MarginContainer/BoxContainer/A"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Values"
+
+[node name="NumberSelector" type="LineEdit" parent="Node2D/MarginContainer/BoxContainer/A"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "6"
+placeholder_text = "6"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Node2D/MarginContainer/BoxContainer"]
+layout_mode = 2
+
+[node name="CheckNames" type="CheckBox" parent="Node2D/MarginContainer/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Names"
+
+[node name="CheckValues" type="CheckBox" parent="Node2D/MarginContainer/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Values"
+
+[node name="CheckAvg" type="CheckBox" parent="Node2D/MarginContainer/BoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Avg"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Node2D/MarginContainer/BoxContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Node2D/MarginContainer/BoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Values" type="VBoxContainer" parent="Node2D/MarginContainer/BoxContainer/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_0xm2m")
+
+[node name="Draw" type="Button" parent="Node2D/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "Draw"
+
+[node name="Save" type="Button" parent="Node2D/MarginContainer/BoxContainer"]
+layout_mode = 2
+text = "Save"
+
+[node name="MarginContainer2" type="MarginContainer" parent="Node2D"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="SubViewportContainer" type="SubViewportContainer" parent="Node2D"]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 4
+
+[node name="SubViewport" type="SubViewport" parent="Node2D/SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Image" parent="Node2D/SubViewportContainer/SubViewport" instance=ExtResource("2_0xm2m")]
+unique_name_in_owner = true
+
+[connection signal="text_changed" from="Node2D/MarginContainer/BoxContainer/A/NumberSelector" to="." method="_on_number_selector_text_changed"]
+[connection signal="toggled" from="Node2D/MarginContainer/BoxContainer/HBoxContainer/CheckNames" to="." method="_on_check_names_toggled"]
+[connection signal="toggled" from="Node2D/MarginContainer/BoxContainer/HBoxContainer/CheckValues" to="." method="_on_check_values_toggled"]
+[connection signal="toggled" from="Node2D/MarginContainer/BoxContainer/HBoxContainer/CheckAvg" to="." method="_on_check_avg_toggled"]
+[connection signal="pressed" from="Node2D/MarginContainer/BoxContainer/Draw" to="." method="_on_draw_pressed"]
+[connection signal="pressed" from="Node2D/MarginContainer/BoxContainer/Save" to="." method="_on_save_pressed"]
+[connection signal="pressed" from="Node2D/MarginContainer/BoxContainer/Save" to="Node2D/MarginContainer/BoxContainer" method="_on_save_pressed"]
