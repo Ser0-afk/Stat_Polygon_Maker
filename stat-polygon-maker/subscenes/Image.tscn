@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://jaj1uxccqu6a"]
-
-[ext_resource type="Script" uid="uid://c4rw4ofmk6il4" path="res://Image.gd" id="1_hl023"]
-
-[node name="Sprite2D" type="Sprite2D"]
-script = ExtResource("1_hl023")
