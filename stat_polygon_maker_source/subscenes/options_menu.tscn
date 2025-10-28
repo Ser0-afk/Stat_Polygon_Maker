@@ -167,6 +167,20 @@ layout_mode = 2
 text = "250"
 virtual_keyboard_type = 2
 
+[node name="DivField" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Polygon"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Polygon/DivField"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Divisions:"
+
+[node name="DivisionsValue" type="LineEdit" parent="MarginContainer/VBoxContainer/Polygon/DivField"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "5"
+virtual_keyboard_type = 2
+
 [node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
 
@@ -185,6 +199,20 @@ text = "Labels distance:"
 unique_name_in_owner = true
 layout_mode = 2
 text = "10"
+virtual_keyboard_type = 2
+
+[node name="LFontSozeField" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Various"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Various/LFontSozeField"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Labels font size:"
+
+[node name="LabelsFontSizeValue" type="LineEdit" parent="MarginContainer/VBoxContainer/Various/LFontSozeField"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "50"
 virtual_keyboard_type = 2
 
 [node name="AvgPosField" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Various"]

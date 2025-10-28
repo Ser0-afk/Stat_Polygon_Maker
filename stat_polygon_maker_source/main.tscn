@@ -160,7 +160,6 @@ text = "Values"
 [node name="CheckAvg" type="CheckBox" parent="Main_Panel/MarginContainer/Variables/HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 10
-button_pressed = true
 text = "Avg"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="Main_Panel/MarginContainer/Variables"]
@@ -214,7 +213,7 @@ anchors_preset = 0
 [connection signal="mouse_entered" from="Main_Panel/MarginContainer/Variables/A2/Options" to="Main_Panel" method="_change_wheel_color" binds= [true]]
 [connection signal="mouse_exited" from="Main_Panel/MarginContainer/Variables/A2/Options" to="Main_Panel" method="_change_wheel_color" binds= [false]]
 [connection signal="toggled" from="Main_Panel/MarginContainer/Variables/A2/Options" to="Main_Panel" method="_on_options_toggled"]
-[connection signal="text_changed" from="Main_Panel/MarginContainer/Variables/A/NumberSelector" to="Main_Panel" method="_on_number_selector_text_changed"]
+[connection signal="text_submitted" from="Main_Panel/MarginContainer/Variables/A/NumberSelector" to="Main_Panel" method="_on_number_selector_text_changed"]
 [connection signal="toggled" from="Main_Panel/MarginContainer/Variables/HBoxContainer/CheckNames" to="Main_Panel" method="_on_check_names_toggled"]
 [connection signal="toggled" from="Main_Panel/MarginContainer/Variables/HBoxContainer/CheckValues" to="Main_Panel" method="_on_check_values_toggled"]
 [connection signal="toggled" from="Main_Panel/MarginContainer/Variables/HBoxContainer/CheckAvg" to="Main_Panel" method="_on_check_avg_toggled"]

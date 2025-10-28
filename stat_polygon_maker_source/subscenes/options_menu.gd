@@ -33,6 +33,8 @@ func set_values():
 	%AvgPosValuex.text = str (ConfigHandler.measures["AVG_POSITION"].x)
 	%AvgPosValuey.text = str (ConfigHandler.measures["AVG_POSITION"].y)
 	%CheckAvgAuto.button_pressed = bool(ConfigHandler.others["AUTO_AVG"])
+	%DivisionsValue.text = str(ConfigHandler.others["DIVISIONS"])
+	%LabelsFontSizeValue.text = str (ConfigHandler.measures["LABELS_FONT_SIZE"])
 
 ##restores values 
 func _on_cancel_pressed() -> void:
@@ -50,6 +52,9 @@ func _on_ok_pressed() -> void:
 	ConfigHandler.save_settings("Measures", "LABELS_DISTANCE", int(%LabelsDistanceValue.text))
 	ConfigHandler.save_settings("Measures", "AVG_POSITION", Vector2i(int(%AvgPosValuex.text), int(%AvgPosValuey.text)))
 	ConfigHandler.save_settings("Others", "AUTO_AVG", %CheckAvgAuto.button_pressed)
+	ConfigHandler.save_settings("Measures", "LABELS_FONT_SIZE", int(%LabelsFontSizeValue.text))
+	ConfigHandler.save_settings("Others", "DIVISIONS",  int(%DivisionsValue.text))
+	
 	
 	
 	ConfigHandler.reload_settings()

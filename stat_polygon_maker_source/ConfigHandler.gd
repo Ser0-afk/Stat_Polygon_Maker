@@ -55,10 +55,11 @@ func create_settings():
 	config.set_value("Colors", "STATS_LINES_COLOR", Color.NAVY_BLUE)
 	
 	config.set_value("Measures", "R", 250)
-	config.set_value("Measures", "CENTER", Vector2i(400, 400))
-	config.set_value("Measures", "IMG_SIZE", Vector2i(800, 800))
+	config.set_value("Measures", "CENTER", Vector2(400, 400))
+	config.set_value("Measures", "IMG_SIZE", Vector2(800, 800))
 	config.set_value("Measures", "LABELS_DISTANCE", 10)
-	config.set_value("Measures", "AVG_POSITION", Vector2i(800 - 75, 800 - 90) )
+	config.set_value("Measures", "AVG_POSITION", Vector2(800 - 75, 800 - 90) )
+	config.set_value("Measures", "LABELS_FONT_SIZE", 50)
 	
 	config.set_value("Others", "VALUE_SCALE", 10)
 	config.set_value("Others", "STARTING_N", 6)
@@ -68,6 +69,7 @@ func create_settings():
 	config.set_value("Others", "SCALING_ON", true)
 	config.set_value("Others", "CENTER_AT_CENTER", true)
 	config.set_value("Others", "AUTO_AVG", true)
+	config.set_value("Others", "DIVISIONS", 5)
 	
 	
 ##updates config file with single key

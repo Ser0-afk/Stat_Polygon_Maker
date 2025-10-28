@@ -2,10 +2,10 @@
 
 [ext_resource type="StyleBox" uid="uid://dunuhse7vycc5" path="res://assets/gui_style/button_style_box.tres" id="1_u41m5"]
 [ext_resource type="StyleBox" uid="uid://bd1qhfsuixmew" path="res://assets/gui_style/panel_container_style_box.tres" id="2_elllf"]
-[ext_resource type="StyleBox" path="res://assets/gui_style/button_hover_style_box.tres" id="2_gy62t"]
-[ext_resource type="StyleBox" path="res://assets/gui_style/line_edit_bg_style_box.tres" id="3_08pso"]
-[ext_resource type="StyleBox" path="res://assets/gui_style/button_pressed_style_box.tres" id="3_asxax"]
-[ext_resource type="StyleBox" path="res://assets/gui_style/line_edit_disabled_bg_style_box.tres" id="4_asxax"]
+[ext_resource type="StyleBox" uid="uid://42q0dyyh2lgt" path="res://assets/gui_style/button_hover_style_box.tres" id="2_gy62t"]
+[ext_resource type="StyleBox" uid="uid://uov6d5c3tbi8" path="res://assets/gui_style/line_edit_bg_style_box.tres" id="3_08pso"]
+[ext_resource type="StyleBox" uid="uid://bamtp6qxoxuy0" path="res://assets/gui_style/button_pressed_style_box.tres" id="3_asxax"]
+[ext_resource type="StyleBox" uid="uid://by546pokpamtx" path="res://assets/gui_style/line_edit_disabled_bg_style_box.tres" id="4_asxax"]
 
 [sub_resource type="Image" id="Image_koweg"]
 data = {

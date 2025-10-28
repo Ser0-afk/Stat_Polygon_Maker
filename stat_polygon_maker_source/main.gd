@@ -86,4 +86,4 @@ func rebuild() -> void:
 		values.append(int(i.get_child(1).text))
 		texts.append(i.get_child(0).text)
 	
-	%Image.redraw(int(%NumberSelector.text), values, texts)
+	%Image.redraw(%Values.get_children().size(), values, texts)

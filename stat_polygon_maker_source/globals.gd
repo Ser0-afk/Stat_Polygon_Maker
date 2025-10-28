@@ -5,12 +5,12 @@ signal rebuild
 signal resize
 signal drag(dragging, scene, offset)
 
-const VERSION = 2.0
+const VERSION = 2.1
 
 ##editable from GUI
 var show_names := false
 var show_values := true
-var show_avg := true
+var show_avg := false
 
 
 
