@@ -1,0 +1,147 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmrdpo7dycs6a"]
+
+[ext_resource type="Theme" uid="uid://by054df4voepp" path="res://assets/DefaulTheme.tres" id="1_6bhqv"]
+[ext_resource type="Texture2D" uid="uid://c3hw44slpwnlo" path="res://assets/cog.svg" id="1_07pwq"]
+[ext_resource type="Texture2D" uid="uid://wnx5de6nr0jr" path="res://assets/cog_dark.svg" id="2_6bhqv"]
+[ext_resource type="Script" uid="uid://bvsvkn4d7ckqo" path="res://subscenes/main_panel.gd" id="2_a6cq5"]
+
+[sub_resource type="Theme" id="Theme_0xm2m"]
+default_font_size = 32
+
+[node name="Main_Panel" type="PanelContainer"]
+size_flags_horizontal = 0
+size_flags_vertical = 2
+theme = ExtResource("1_6bhqv")
+script = ExtResource("2_a6cq5")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+
+[node name="Variables" type="VBoxContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(450, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = SubResource("Theme_0xm2m")
+
+[node name="A2" type="HBoxContainer" parent="MarginContainer/Variables"]
+layout_mode = 2
+
+[node name="Drag" type="Button" parent="MarginContainer/Variables/A2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_6bhqv")
+text = " : : : : : : : : : : : : : : : :"
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/Variables/A2"]
+layout_mode = 2
+
+[node name="Options" type="TextureButton" parent="MarginContainer/Variables/A2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("1_07pwq")
+texture_pressed = ExtResource("2_6bhqv")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/Variables"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="A" type="HBoxContainer" parent="MarginContainer/Variables"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/Variables/A"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Values"
+
+[node name="NumberSelector" type="LineEdit" parent="MarginContainer/Variables/A"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+text = "6"
+placeholder_text = "6"
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/Variables"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/Variables"]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="Values" type="VBoxContainer" parent="MarginContainer/Variables/ScrollContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme = SubResource("Theme_0xm2m")
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/Variables"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+size_flags_vertical = 4
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/Variables"]
+layout_mode = 2
+
+[node name="CheckNames" type="CheckBox" parent="MarginContainer/Variables/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Names"
+
+[node name="CheckValues" type="CheckBox" parent="MarginContainer/Variables/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+button_pressed = true
+text = "Values"
+
+[node name="CheckAvg" type="CheckBox" parent="MarginContainer/Variables/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+button_pressed = true
+text = "Avg"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/Variables"]
+layout_mode = 2
+
+[node name="ColorsSelection" type="Button" parent="MarginContainer/Variables/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Colors"
+
+[node name="Draw" type="Button" parent="MarginContainer/Variables/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Draw"
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/Variables"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Img_name" type="LineEdit" parent="MarginContainer/Variables"]
+unique_name_in_owner = true
+layout_mode = 2
+placeholder_text = "File Name"
+
+[node name="Save" type="Button" parent="MarginContainer/Variables"]
+layout_mode = 2
+text = "Save"
+
+[connection signal="toggled" from="MarginContainer/Variables/A2/Options" to="." method="_on_options_toggled"]
+[connection signal="toggled" from="MarginContainer/Variables/HBoxContainer/CheckNames" to="." method="_on_check_names_toggled"]
+[connection signal="toggled" from="MarginContainer/Variables/HBoxContainer/CheckValues" to="." method="_on_check_values_toggled"]
+[connection signal="toggled" from="MarginContainer/Variables/HBoxContainer/CheckAvg" to="." method="_on_check_avg_toggled"]
+[connection signal="pressed" from="MarginContainer/Variables/HBoxContainer2/Draw" to="." method="_on_draw_pressed"]
+[connection signal="pressed" from="MarginContainer/Variables/Save" to="." method="_on_save_pressed"]

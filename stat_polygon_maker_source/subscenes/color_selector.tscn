@@ -1,0 +1,41 @@
+[gd_scene load_steps=3 format=3 uid="uid://bt7mpy3im7ohk"]
+
+[ext_resource type="Script" uid="uid://dn1uwtu1f42pj" path="res://subscenes/color_selector.gd" id="1_4yusf"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4yusf"]
+bg_color = Color(0.662745, 0.662745, 0.662745, 0.694118)
+
+[node name="PanelContainer" type="PanelContainer"]
+offset_right = 183.0
+offset_bottom = 23.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_4yusf")
+script = ExtResource("1_4yusf")
+
+[node name="ColorSelector" type="HBoxContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Name" type="Label" parent="ColorSelector"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "Image BG:"
+
+[node name="MarginContainer" type="MarginContainer" parent="ColorSelector"]
+layout_mode = 2
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Color" type="ColorPickerButton" parent="ColorSelector/MarginContainer"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+text = "vvv"
+color = Color(0.899258, 0.899258, 0.899258, 1)
+
+[connection signal="color_changed" from="ColorSelector/MarginContainer/Color" to="ColorSelector" method="_on_color_color_changed"]

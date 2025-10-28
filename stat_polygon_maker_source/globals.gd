@@ -1,9 +1,18 @@
 extends Node
 
+signal redraw
+signal rebuild
+signal resize
+signal drag(dragging, scene, offset)
+
+const VERSION = 2.0
+
 ##editable from GUI
 var show_names := false
 var show_values := true
 var show_avg := true
+
+
 
 func avg(a : Array) -> float:
 	var t := 0.0

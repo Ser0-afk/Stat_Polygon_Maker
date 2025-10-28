@@ -1,0 +1,103 @@
+[gd_scene load_steps=3 format=3 uid="uid://dw3dlgaft27yh"]
+
+[ext_resource type="Theme" uid="uid://drg3uf2vg7fym" path="res://assets/gui_style/DefaulTheme.tres" id="1_udmnn"]
+[ext_resource type="Script" uid="uid://3cbalkkkbqag" path="res://subscenes/color_menu.gd" id="2_udmnn"]
+
+[node name="Color_menu" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -125.0
+offset_top = -99.0
+offset_right = 125.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme = ExtResource("1_udmnn")
+script = ExtResource("2_udmnn")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Drag" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_udmnn")
+text = " : : : : "
+
+[node name="Close" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "X"
+
+[node name="selector_container" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+theme_override_constants/margin_left = 0
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 20
+theme_override_constants/margin_bottom = 0
+
+[node name="Colors" type="VBoxContainer" parent="MarginContainer/VBoxContainer/selector_container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="GUI_Colors" type="VBoxContainer" parent="MarginContainer/VBoxContainer/selector_container"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Reload required for GUI changes"
+
+[node name="Reload" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+size_flags_vertical = 8
+text = "Reload"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+
+[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
+
+[node name="GUI_IMG" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "GUI
+"
+
+[node name="OK" type="Button" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "OK"
+
+[connection signal="button_down" from="MarginContainer/VBoxContainer/HBoxContainer2/Drag" to="." method="drag_menu" binds= [true]]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/HBoxContainer2/Drag" to="." method="drag_menu" binds= [false]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer2/Close" to="." method="_on_close_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Reload" to="." method="_on_reload_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/HBoxContainer/GUI_IMG" to="." method="_on_gui_img_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/HBoxContainer/OK" to="." method="_on_ok_pressed"]

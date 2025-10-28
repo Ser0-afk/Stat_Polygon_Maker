@@ -1,0 +1,247 @@
+[gd_scene load_steps=5 format=3 uid="uid://btc68xlkr86md"]
+
+[ext_resource type="Theme" uid="uid://drg3uf2vg7fym" path="res://assets/gui_style/DefaulTheme.tres" id="1_xi73v"]
+[ext_resource type="Script" uid="uid://pedetm07c17b" path="res://subscenes/options_menu.gd" id="2_64dx8"]
+[ext_resource type="Script" uid="uid://dsl4lnj10kibe" path="res://subscenes/option_menu/scale.gd" id="3_85cdh"]
+[ext_resource type="Script" uid="uid://bl0hb5lb6na3d" path="res://subscenes/option_menu/center.gd" id="4_ieftd"]
+
+[node name="PanelContainer" type="PanelContainer"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -162.0
+offset_top = -20.0
+offset_right = 162.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("1_xi73v")
+script = ExtResource("2_64dx8")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 20
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 20
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 0
+
+[node name="TopButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Drag" type="Button" parent="MarginContainer/VBoxContainer/TopButtons"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_xi73v")
+text = " : : : :"
+
+[node name="Button" type="Button" parent="MarginContainer/VBoxContainer/TopButtons"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "X"
+
+[node name="MarginContainer4" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="ScaleField" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("3_85cdh")
+
+[node name="ScaleContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer/ScaleField"]
+layout_mode = 2
+
+[node name="CheckScale" type="CheckBox" parent="MarginContainer/VBoxContainer/ScaleField/ScaleContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+button_pressed = true
+text = "Scale image"
+
+[node name="ScaleValue" type="LineEdit" parent="MarginContainer/VBoxContainer/ScaleField/ScaleContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "100"
+virtual_keyboard_type = 2
+
+[node name="ScaleSlider" type="HSlider" parent="MarginContainer/VBoxContainer/ScaleField"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="MarginContainer2" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="SizeField" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Image Size" type="Label" parent="MarginContainer/VBoxContainer/SizeField"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Image size:"
+
+[node name="HSize" type="LineEdit" parent="MarginContainer/VBoxContainer/SizeField"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+text = "800"
+placeholder_text = "800"
+virtual_keyboard_type = 2
+
+[node name="VSize" type="LineEdit" parent="MarginContainer/VBoxContainer/SizeField"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "800"
+placeholder_text = "800"
+virtual_keyboard_type = 2
+
+[node name="MarginContainer5" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 15
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 15
+
+[node name="Polygon" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+script = ExtResource("4_ieftd")
+
+[node name="CenterField" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Polygon"]
+layout_mode = 2
+
+[node name="Center" type="Label" parent="MarginContainer/VBoxContainer/Polygon/CenterField"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Center:"
+
+[node name="HCenter" type="LineEdit" parent="MarginContainer/VBoxContainer/Polygon/CenterField"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "400"
+placeholder_text = "400"
+editable = false
+virtual_keyboard_type = 2
+
+[node name="VCenter" type="LineEdit" parent="MarginContainer/VBoxContainer/Polygon/CenterField"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "400"
+placeholder_text = "400"
+editable = false
+virtual_keyboard_type = 2
+
+[node name="CheckCenter" type="CheckBox" parent="MarginContainer/VBoxContainer/Polygon"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 0
+button_pressed = true
+text = "Auto center"
+
+[node name="RadiusField" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Polygon"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Polygon/RadiusField"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Radius:"
+
+[node name="RValue" type="LineEdit" parent="MarginContainer/VBoxContainer/Polygon/RadiusField"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "250"
+virtual_keyboard_type = 2
+
+[node name="MarginContainer3" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Various" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="LabelDistanceField" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Various"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Various/LabelDistanceField"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Labels distance:"
+
+[node name="LabelsDistanceValue" type="LineEdit" parent="MarginContainer/VBoxContainer/Various/LabelDistanceField"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "10"
+virtual_keyboard_type = 2
+
+[node name="AvgPosField" type="HBoxContainer" parent="MarginContainer/VBoxContainer/Various"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/Various/AvgPosField"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Avg position:"
+
+[node name="AvgPosValuex" type="LineEdit" parent="MarginContainer/VBoxContainer/Various/AvgPosField"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "710"
+editable = false
+virtual_keyboard_type = 2
+
+[node name="AvgPosValuey" type="LineEdit" parent="MarginContainer/VBoxContainer/Various/AvgPosField"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "725"
+editable = false
+virtual_keyboard_type = 2
+
+[node name="CheckAvgAuto" type="CheckBox" parent="MarginContainer/VBoxContainer/Various"]
+unique_name_in_owner = true
+layout_mode = 2
+button_pressed = true
+text = "Auto positioning"
+
+[node name="MarginContainer6" type="MarginContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme_override_constants/margin_left = 25
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 25
+theme_override_constants/margin_bottom = 10
+
+[node name="BottomButtons" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Cancel" type="Button" parent="MarginContainer/VBoxContainer/BottomButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "Cancel"
+
+[node name="OK" type="Button" parent="MarginContainer/VBoxContainer/BottomButtons"]
+layout_mode = 2
+size_flags_horizontal = 3
+text = "OK"
+
+[connection signal="button_down" from="MarginContainer/VBoxContainer/TopButtons/Drag" to="." method="drag_menu" binds= [true]]
+[connection signal="button_up" from="MarginContainer/VBoxContainer/TopButtons/Drag" to="." method="drag_menu" binds= [false]]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/TopButtons/Button" to="." method="_on_button_pressed"]
+[connection signal="editing_toggled" from="MarginContainer/VBoxContainer/ScaleField/ScaleContainer/ScaleValue" to="MarginContainer/VBoxContainer/ScaleField" method="_on_scale_value_editing_toggled"]
+[connection signal="text_changed" from="MarginContainer/VBoxContainer/ScaleField/ScaleContainer/ScaleValue" to="MarginContainer/VBoxContainer/ScaleField" method="_on_scale_value_text_changed"]
+[connection signal="value_changed" from="MarginContainer/VBoxContainer/ScaleField/ScaleSlider" to="MarginContainer/VBoxContainer/ScaleField" method="_on_scale_slider_value_changed"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Polygon/CheckCenter" to="MarginContainer/VBoxContainer/Polygon" method="_on_check_center_toggled"]
+[connection signal="toggled" from="MarginContainer/VBoxContainer/Various/CheckAvgAuto" to="." method="_on_check_avg_auto_toggled"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtons/Cancel" to="." method="_on_cancel_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/BottomButtons/OK" to="." method="_on_ok_pressed"]

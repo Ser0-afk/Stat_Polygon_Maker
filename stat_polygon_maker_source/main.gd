@@ -1,37 +1,82 @@
 extends Control
 
 
-var OUTPUT_PATH
+const SUBVIEWPORT_SIZE =  Vector2i(800,800)
+var def_theme : Theme = load("res://assets/gui_style/DefaulTheme.tres")
 
-const setter_scene = preload("uid://etfxgbrrmww8")
-
-var N := 6
 var values := []
 var texts := []
+var drag : bool = false
+var drag_offset:= Vector2(0,0)
+@onready var dragging_scene = %Main_Panel
 
 func _ready() -> void:
-	##GUI controls
-	$".".size = get_viewport().size
-	$Node2D/MarginContainer.custom_minimum_size.y = $".".size.y
-	%SubViewport.size = ConfigHandler.load_settings("Measures")["IMG_SIZE"]
 	
-	OUTPUT_PATH = ConfigHandler.load_settings("Others")["OUTPUT_PATH"]
-	N = ConfigHandler.load_settings("Others")["STARTING_N"]
-	%Variables.modulate = ConfigHandler.load_settings("Colors")["WINDOW_TEXT"]
-	
-	for i in N:
-		var new_sel = setter_scene.instantiate()
-		new_sel.get_child(0).placeholder_text = "Value" + str(i)
-		%Values.add_child(new_sel)
-	
-	_on_draw_pressed()
+	globals.resize.connect(resize)
+	globals.redraw.connect(redraw)
+	globals.rebuild.connect(rebuild)
+	globals.drag.connect(drag_toogle)
 
+	
+	resize()
+	rebuild()
+
+##toggles dragging and prevents box being dragged outside of screen 
+func drag_toogle(dragging:bool, scene, offset):
+	if dragging:
+		dragging_scene = scene
+		dragging_scene.move_to_front()
+		drag_offset = offset
+	drag = dragging
+	if not dragging:
+		if dragging_scene.global_position.x + dragging_scene.size.x < 25:
+			dragging_scene.global_position.x = 25 - dragging_scene.size.x
+		if dragging_scene.global_position.y + dragging_scene.size.y < 25:
+			dragging_scene.global_position.y = 25 - dragging_scene.size.y
+			
+		if dragging_scene.global_position.x > get_viewport_rect().size.x:
+			dragging_scene.global_position.x = get_viewport_rect().size.x - 25
+		if dragging_scene.global_position.y> get_viewport_rect().size.y:
+			dragging_scene.global_position.y = get_viewport_rect().size.y - 25
+
+##for dragging
+func _physics_process(_delta: float) -> void:
+	if drag:
+		dragging_scene.global_position = get_global_mouse_position() - drag_offset
+
+##resizes image subviewport according to size and scale
+func resize():
+	var subview_size : Vector2
+	
+	if ConfigHandler.others["SCALING_ON"]:
+		var ratio : float =  float(ConfigHandler.measures["IMG_SIZE"].x)/ ConfigHandler.measures["IMG_SIZE"].y
+		
+		if ratio >= 1:
+			subview_size = Vector2(SUBVIEWPORT_SIZE * ConfigHandler.others["IMG_SCALE"]) * Vector2(1, 1/ratio)
+		else :
+			subview_size = Vector2(SUBVIEWPORT_SIZE * ConfigHandler.others["IMG_SCALE"]) * Vector2(ratio, 1)
+	else:
+		subview_size = ConfigHandler.measures["IMG_SIZE"]
+	
+	
+	%SubViewport.size = ConfigHandler.measures["IMG_SIZE"]
+	%SubViewportContainer.pivot_offset = %SubViewport.size/2
+	%Image.position = Vector2(0, 0)
+	
+	%SubViewportContainer.scale = subview_size / Vector2(ConfigHandler.measures["IMG_SIZE"])
+	
+##draws background
 func _draw() -> void:
 	draw_rect(Rect2(Vector2(0,0), get_viewport().size), 
-				ConfigHandler.load_settings("Colors")["WINDOW_BG"])
+				ConfigHandler.gui_colors["WINDOW_BG"])
 
-func _on_draw_pressed() -> void:
-	
+##redraws without changing parameters, for uodating colors only
+func redraw():
+	queue_redraw()
+	%Image.queue_redraw()
+
+##draws polygon
+func rebuild() -> void:
 	##reset values
 	values = []
 	texts = []
@@ -42,40 +87,3 @@ func _on_draw_pressed() -> void:
 		texts.append(i.get_child(0).text)
 	
 	%Image.redraw(int(%NumberSelector.text), values, texts)
-
-
-func _on_number_selector_text_changed(new_text :String) -> void:
-	
-	var nN = int(new_text)
-	
-	##creates new setters
-	for i in nN - N: 
-		var new_sel = setter_scene.instantiate()
-		new_sel.get_child(0).placeholder_text = "Value" + str(i)
-		%Values.add_child(new_sel)
-	
-	##deletes setters
-	for i in N - nN:
-		%Values.get_child( N - i - 1).queue_free()
-	
-	N = nN
-
-
-func _on_save_pressed() -> void:
-	##wait for rendering to finish
-	await RenderingServer.frame_post_draw
-	var image = %SubViewport.get_texture().get_image()
-	
-	##checks if folder exists and creates it if not
-	var path = globals.create_path(OUTPUT_PATH, 1)
-	
-	globals.save_png(image, path, %Img_name.text)
-
-
-##Toggles
-func _on_check_names_toggled(toggled_on: bool) -> void:
-	globals.show_names = toggled_on
-func _on_check_values_toggled(toggled_on: bool) -> void:
-	globals.show_values = toggled_on
-func _on_check_avg_toggled(toggled_on: bool) -> void:
-	globals.show_avg = toggled_on

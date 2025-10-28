@@ -1,129 +1,225 @@
-[gd_scene load_steps=5 format=3 uid="uid://ch2uhnr0fs8ab"]
+[gd_scene load_steps=11 format=3 uid="uid://ch2uhnr0fs8ab"]
 
-[ext_resource type="Theme" uid="uid://by054df4voepp" path="res://DefaulTheme.tres" id="1_h2yge"]
+[ext_resource type="Theme" uid="uid://drg3uf2vg7fym" path="res://assets/gui_style/DefaulTheme.tres" id="1_h2yge"]
 [ext_resource type="Script" uid="uid://btgms3t6kk45e" path="res://main.gd" id="1_ig7tw"]
 [ext_resource type="PackedScene" uid="uid://jaj1uxccqu6a" path="res://subscenes/Image.tscn" id="2_0xm2m"]
+[ext_resource type="Texture2D" uid="uid://c3hw44slpwnlo" path="res://assets/cog.svg" id="3_7mycd"]
+[ext_resource type="Script" uid="uid://cdidqxfhrn1cn" path="res://subscenes/sub_viewport_container.gd" id="3_kek77"]
+[ext_resource type="Script" uid="uid://bvsvkn4d7ckqo" path="res://subscenes/main_panel.gd" id="5_5vw27"]
+[ext_resource type="Texture2D" uid="uid://dqmr7qnvuqvao" path="res://assets/cog_white.svg" id="6_4c57u"]
+[ext_resource type="PackedScene" uid="uid://btc68xlkr86md" path="res://subscenes/options_menu.tscn" id="6_5vw27"]
+[ext_resource type="PackedScene" uid="uid://dw3dlgaft27yh" path="res://subscenes/color_menu.tscn" id="7_272bh"]
 
-[sub_resource type="Theme" id="Theme_0xm2m"]
+[sub_resource type="Theme" id="Theme_5vw27"]
 default_font_size = 32
 
-[node name="Main" type="MarginContainer"]
-offset_right = 1600.0
-offset_bottom = 900.0
+[node name="Main" type="Panel"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 size_flags_horizontal = 2
 size_flags_vertical = 2
 theme = ExtResource("1_h2yge")
-theme_override_constants/margin_left = 50
-theme_override_constants/margin_right = 50
 script = ExtResource("1_ig7tw")
 
-[node name="Node2D" type="HBoxContainer" parent="."]
-layout_mode = 2
-size_flags_vertical = 0
+[node name="SubViewportContainer" type="SubViewportContainer" parent="."]
+unique_name_in_owner = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -273.0
+offset_right = 504.0
+offset_bottom = 239.0
+grow_horizontal = 2
+grow_vertical = 2
+pivot_offset = Vector2(256, 256)
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("3_kek77")
 
-[node name="MarginContainer" type="MarginContainer" parent="Node2D"]
-custom_minimum_size = Vector2(0, 900)
+[node name="SubViewport" type="SubViewport" parent="SubViewportContainer"]
+unique_name_in_owner = true
+handle_input_locally = false
+render_target_update_mode = 4
+
+[node name="Image" parent="SubViewportContainer/SubViewport" instance=ExtResource("2_0xm2m")]
+unique_name_in_owner = true
+
+[node name="Main_Panel" type="PanelContainer" parent="."]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(0, 800)
+layout_mode = 2
+offset_left = 60.0
+offset_top = 29.0
+offset_right = 560.0
+offset_bottom = 829.0
+size_flags_horizontal = 0
+size_flags_vertical = 4
+theme = ExtResource("1_h2yge")
+script = ExtResource("5_5vw27")
+
+[node name="MarginContainer" type="MarginContainer" parent="Main_Panel"]
 layout_mode = 2
 size_flags_horizontal = 0
-size_flags_vertical = 0
-theme_override_constants/margin_top = 50
-theme_override_constants/margin_right = 50
-theme_override_constants/margin_bottom = 50
 
-[node name="Variables" type="VBoxContainer" parent="Node2D/MarginContainer"]
+[node name="Variables" type="VBoxContainer" parent="Main_Panel/MarginContainer"]
 unique_name_in_owner = true
 custom_minimum_size = Vector2(450, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-theme = SubResource("Theme_0xm2m")
+theme = SubResource("Theme_5vw27")
 
-[node name="A" type="HBoxContainer" parent="Node2D/MarginContainer/Variables"]
+[node name="A2" type="HBoxContainer" parent="Main_Panel/MarginContainer/Variables"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="Node2D/MarginContainer/Variables/A"]
+[node name="Drag" type="Button" parent="Main_Panel/MarginContainer/Variables/A2"]
+custom_minimum_size = Vector2(0, 30)
+layout_mode = 2
+size_flags_horizontal = 3
+theme = ExtResource("1_h2yge")
+text = " : : : :"
+
+[node name="MarginContainer4" type="MarginContainer" parent="Main_Panel/MarginContainer/Variables/A2"]
+layout_mode = 2
+
+[node name="Options" type="TextureButton" parent="Main_Panel/MarginContainer/Variables/A2"]
+unique_name_in_owner = true
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 2
+toggle_mode = true
+texture_normal = ExtResource("6_4c57u")
+texture_pressed = ExtResource("3_7mycd")
+texture_hover = ExtResource("6_4c57u")
+ignore_texture_size = true
+stretch_mode = 5
+
+[node name="MarginContainer5" type="MarginContainer" parent="Main_Panel/MarginContainer/Variables"]
+layout_mode = 2
+size_flags_horizontal = 3
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="A" type="HBoxContainer" parent="Main_Panel/MarginContainer/Variables"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="Main_Panel/MarginContainer/Variables/A"]
 layout_mode = 2
 size_flags_horizontal = 3
 text = "Values"
 
-[node name="NumberSelector" type="LineEdit" parent="Node2D/MarginContainer/Variables/A"]
+[node name="NumberSelector" type="LineEdit" parent="Main_Panel/MarginContainer/Variables/A"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 0
 text = "6"
 placeholder_text = "6"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Node2D/MarginContainer/Variables"]
-layout_mode = 2
-
-[node name="CheckNames" type="CheckBox" parent="Node2D/MarginContainer/Variables/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-text = "Names"
-
-[node name="CheckValues" type="CheckBox" parent="Node2D/MarginContainer/Variables/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-button_pressed = true
-text = "Values"
-
-[node name="CheckAvg" type="CheckBox" parent="Node2D/MarginContainer/Variables/HBoxContainer"]
-layout_mode = 2
-size_flags_horizontal = 3
-button_pressed = true
-text = "Avg"
-
-[node name="MarginContainer2" type="MarginContainer" parent="Node2D/MarginContainer/Variables"]
+[node name="MarginContainer2" type="MarginContainer" parent="Main_Panel/MarginContainer/Variables"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="ScrollContainer" type="ScrollContainer" parent="Node2D/MarginContainer/Variables"]
+[node name="ScrollContainer" type="ScrollContainer" parent="Main_Panel/MarginContainer/Variables"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Values" type="VBoxContainer" parent="Node2D/MarginContainer/Variables/ScrollContainer"]
+[node name="Values" type="VBoxContainer" parent="Main_Panel/MarginContainer/Variables/ScrollContainer"]
 unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 3
-theme = SubResource("Theme_0xm2m")
+theme = SubResource("Theme_5vw27")
 
-[node name="MarginContainer3" type="MarginContainer" parent="Node2D/MarginContainer/Variables"]
+[node name="MarginContainer3" type="MarginContainer" parent="Main_Panel/MarginContainer/Variables"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
+size_flags_vertical = 4
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
 
-[node name="Draw" type="Button" parent="Node2D/MarginContainer/Variables"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Main_Panel/MarginContainer/Variables"]
 layout_mode = 2
+
+[node name="CheckNames" type="CheckBox" parent="Main_Panel/MarginContainer/Variables/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 2
+text = "Names"
+
+[node name="CheckValues" type="CheckBox" parent="Main_Panel/MarginContainer/Variables/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 6
+button_pressed = true
+text = "Values"
+
+[node name="CheckAvg" type="CheckBox" parent="Main_Panel/MarginContainer/Variables/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 10
+button_pressed = true
+text = "Avg"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Main_Panel/MarginContainer/Variables"]
+layout_mode = 2
+
+[node name="ColorsSelection" type="Button" parent="Main_Panel/MarginContainer/Variables/HBoxContainer2"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+toggle_mode = true
+text = "Colors"
+
+[node name="Draw" type="Button" parent="Main_Panel/MarginContainer/Variables/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
 text = "Draw"
 
-[node name="Img_name" type="LineEdit" parent="Node2D/MarginContainer/Variables"]
+[node name="MarginContainer4" type="MarginContainer" parent="Main_Panel/MarginContainer/Variables"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="Img_name" type="LineEdit" parent="Main_Panel/MarginContainer/Variables"]
 unique_name_in_owner = true
 layout_mode = 2
 placeholder_text = "File Name"
 
-[node name="Save" type="Button" parent="Node2D/MarginContainer/Variables"]
+[node name="Save" type="Button" parent="Main_Panel/MarginContainer/Variables"]
 layout_mode = 2
 text = "Save"
 
-[node name="MarginContainer2" type="MarginContainer" parent="Node2D"]
+[node name="OptionsMenu" parent="." instance=ExtResource("6_5vw27")]
+unique_name_in_owner = true
+visible = false
 layout_mode = 2
-size_flags_horizontal = 3
-
-[node name="SubViewportContainer" type="SubViewportContainer" parent="Node2D"]
-layout_mode = 2
-size_flags_horizontal = 8
+anchors_preset = 0
+size_flags_horizontal = 4
 size_flags_vertical = 4
 
-[node name="SubViewport" type="SubViewport" parent="Node2D/SubViewportContainer"]
+[node name="Color_menu" parent="." instance=ExtResource("7_272bh")]
 unique_name_in_owner = true
-handle_input_locally = false
-render_target_update_mode = 4
+visible = false
+layout_mode = 2
+anchors_preset = 0
 
-[node name="Image" parent="Node2D/SubViewportContainer/SubViewport" instance=ExtResource("2_0xm2m")]
-unique_name_in_owner = true
-
-[connection signal="text_changed" from="Node2D/MarginContainer/Variables/A/NumberSelector" to="." method="_on_number_selector_text_changed"]
-[connection signal="toggled" from="Node2D/MarginContainer/Variables/HBoxContainer/CheckNames" to="." method="_on_check_names_toggled"]
-[connection signal="toggled" from="Node2D/MarginContainer/Variables/HBoxContainer/CheckValues" to="." method="_on_check_values_toggled"]
-[connection signal="toggled" from="Node2D/MarginContainer/Variables/HBoxContainer/CheckAvg" to="." method="_on_check_avg_toggled"]
-[connection signal="pressed" from="Node2D/MarginContainer/Variables/Draw" to="." method="_on_draw_pressed"]
-[connection signal="pressed" from="Node2D/MarginContainer/Variables/Save" to="." method="_on_save_pressed"]
-[connection signal="pressed" from="Node2D/MarginContainer/Variables/Save" to="Node2D/MarginContainer/Variables" method="_on_save_pressed"]
+[connection signal="gui_input" from="SubViewportContainer" to="SubViewportContainer" method="_on_gui_input"]
+[connection signal="gui_input" from="Main_Panel" to="Main_Panel" method="_on_gui_input"]
+[connection signal="button_down" from="Main_Panel/MarginContainer/Variables/A2/Drag" to="Main_Panel" method="drag_menu" binds= [true]]
+[connection signal="button_up" from="Main_Panel/MarginContainer/Variables/A2/Drag" to="Main_Panel" method="drag_menu" binds= [false]]
+[connection signal="mouse_entered" from="Main_Panel/MarginContainer/Variables/A2/Options" to="Main_Panel" method="_change_wheel_color" binds= [true]]
+[connection signal="mouse_exited" from="Main_Panel/MarginContainer/Variables/A2/Options" to="Main_Panel" method="_change_wheel_color" binds= [false]]
+[connection signal="toggled" from="Main_Panel/MarginContainer/Variables/A2/Options" to="Main_Panel" method="_on_options_toggled"]
+[connection signal="text_changed" from="Main_Panel/MarginContainer/Variables/A/NumberSelector" to="Main_Panel" method="_on_number_selector_text_changed"]
+[connection signal="toggled" from="Main_Panel/MarginContainer/Variables/HBoxContainer/CheckNames" to="Main_Panel" method="_on_check_names_toggled"]
+[connection signal="toggled" from="Main_Panel/MarginContainer/Variables/HBoxContainer/CheckValues" to="Main_Panel" method="_on_check_values_toggled"]
+[connection signal="toggled" from="Main_Panel/MarginContainer/Variables/HBoxContainer/CheckAvg" to="Main_Panel" method="_on_check_avg_toggled"]
+[connection signal="toggled" from="Main_Panel/MarginContainer/Variables/HBoxContainer2/ColorsSelection" to="Main_Panel" method="_on_colors_selection_toggled"]
+[connection signal="pressed" from="Main_Panel/MarginContainer/Variables/HBoxContainer2/Draw" to="Main_Panel" method="_on_draw_pressed"]
+[connection signal="pressed" from="Main_Panel/MarginContainer/Variables/Save" to="Main_Panel" method="_on_save_pressed"]
+[connection signal="gui_input" from="OptionsMenu" to="OptionsMenu" method="_on_gui_input"]
+[connection signal="gui_input" from="Color_menu" to="Color_menu" method="_on_gui_input"]

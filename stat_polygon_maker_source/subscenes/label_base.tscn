@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://3d8dg2bpuajt"]
 
-[ext_resource type="Theme" uid="uid://by054df4voepp" path="res://DefaulTheme.tres" id="1_6n4ix"]
+[ext_resource type="Theme" uid="uid://drg3uf2vg7fym" path="res://assets/gui_style/DefaulTheme.tres" id="1_6n4ix"]
 
 [node name="Label" type="Label"]
 offset_right = 1.0
