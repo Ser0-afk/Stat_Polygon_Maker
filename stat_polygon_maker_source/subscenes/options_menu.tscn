@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://btc68xlkr86md"]
 
-[ext_resource type="Theme" uid="uid://drg3uf2vg7fym" path="res://assets/gui_style/DefaulTheme.tres" id="1_xi73v"]
+[ext_resource type="Theme" uid="uid://dh5my1n4mq6e4" path="res://assets/gui_style/DefaulTheme.tres" id="1_xi73v"]
 [ext_resource type="Script" uid="uid://pedetm07c17b" path="res://subscenes/options_menu.gd" id="2_64dx8"]
 [ext_resource type="Script" uid="uid://dsl4lnj10kibe" path="res://subscenes/option_menu/scale.gd" id="3_85cdh"]
 [ext_resource type="Script" uid="uid://bl0hb5lb6na3d" path="res://subscenes/option_menu/center.gd" id="4_ieftd"]
@@ -149,7 +149,8 @@ virtual_keyboard_type = 2
 [node name="CheckCenter" type="CheckBox" parent="MarginContainer/VBoxContainer/Polygon"]
 unique_name_in_owner = true
 layout_mode = 2
-size_flags_horizontal = 0
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 20
 button_pressed = true
 text = "Auto center"
 
@@ -240,6 +241,8 @@ virtual_keyboard_type = 2
 [node name="CheckAvgAuto" type="CheckBox" parent="MarginContainer/VBoxContainer/Various"]
 unique_name_in_owner = true
 layout_mode = 2
+size_flags_horizontal = 8
+theme_override_font_sizes/font_size = 20
 button_pressed = true
 text = "Auto positioning"
 

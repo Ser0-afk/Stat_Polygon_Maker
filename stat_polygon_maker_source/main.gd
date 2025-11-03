@@ -52,9 +52,9 @@ func resize():
 		var ratio : float =  float(ConfigHandler.measures["IMG_SIZE"].x)/ ConfigHandler.measures["IMG_SIZE"].y
 		
 		if ratio >= 1:
-			subview_size = Vector2(SUBVIEWPORT_SIZE * ConfigHandler.others["IMG_SCALE"]) * Vector2(1, 1/ratio)
+			subview_size = Vector2(SUBVIEWPORT_SIZE * ConfigHandler.others["IMG_SCALE"]/100) * Vector2(1, 1/ratio)
 		else :
-			subview_size = Vector2(SUBVIEWPORT_SIZE * ConfigHandler.others["IMG_SCALE"]) * Vector2(ratio, 1)
+			subview_size = Vector2(SUBVIEWPORT_SIZE * ConfigHandler.others["IMG_SCALE"]/100) * Vector2(ratio, 1)
 	else:
 		subview_size = ConfigHandler.measures["IMG_SIZE"]
 	

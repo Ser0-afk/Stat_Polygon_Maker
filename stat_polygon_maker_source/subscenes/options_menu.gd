@@ -16,12 +16,13 @@ func _on_gui_input(event: InputEvent) -> void:
 		drag_menu(true)
 
 func _ready() -> void:
+	%ScaleSlider.modulate = ConfigHandler.gui_colors["BUTTONS"].lightened(0.3)
 	set_values()
 
 ##sets menu values to stored ones
 func set_values():
-	%ScaleValue.text = str(ConfigHandler.others["IMG_SCALE"]*100)
-	%ScaleSlider.value = ConfigHandler.others["IMG_SCALE"]*100
+	%ScaleValue.text = str(ConfigHandler.others["IMG_SCALE"])
+	%ScaleSlider.value = ConfigHandler.others["IMG_SCALE"]
 	%HSize.text = str (ConfigHandler.measures["IMG_SIZE"].x)
 	%VSize.text = str (ConfigHandler.measures["IMG_SIZE"].y)
 	%CheckScale.button_pressed = bool(ConfigHandler.others["SCALING_ON"])
@@ -43,7 +44,7 @@ func _on_cancel_pressed() -> void:
 	
 ##saves values and applies them
 func _on_ok_pressed() -> void:
-	ConfigHandler.save_settings("Others", "IMG_SCALE", float(%ScaleValue.text)/100)
+	ConfigHandler.save_settings("Others", "IMG_SCALE", int(%ScaleValue.text))
 	ConfigHandler.save_settings("Measures", "IMG_SIZE", Vector2i(int(%HSize.text), int(%VSize.text)))
 	ConfigHandler.save_settings("Others", "SCALING_ON", %CheckScale.button_pressed)
 	ConfigHandler.save_settings("Measures", "CENTER", Vector2i(int(%HCenter.text), int(%VCenter.text)) )

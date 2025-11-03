@@ -57,6 +57,7 @@ func _on_cancel_pressed() -> void:
 
 ##reloads gui so gui changes have effect
 func _on_reload_pressed() -> void:
+	_on_ok_pressed()
 	change_def_style()
 	
 	call_deferred("reload")
@@ -89,7 +90,7 @@ func change_def_style():
 				def_theme.set_color("font_hover_pressed_color", i, ConfigHandler.gui_colors["WINDOW_TEXT"].lightened(0.3))
 	
 	var panel_container_style : StyleBoxFlat
-	panel_container_style = load ("res://assets/gui_style/button_style_box.tres")
+	panel_container_style = load ("res://assets/gui_style/panel_container_style_box.tres")
 	panel_container_style.bg_color = ConfigHandler.gui_colors["PANELS"]
 	ResourceSaver.save(panel_container_style, "res://assets/gui_style/panel_container_style_box.tres")
 	

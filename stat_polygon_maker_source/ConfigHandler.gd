@@ -11,35 +11,54 @@ var gui_colors
 func _ready() -> void:
 	if not FileAccess.file_exists(CONFIG_PATH):
 		create_settings()
+		call_deferred("save")
 	else:
 		config.load(CONFIG_PATH)
 	
 	##for version compatibility, replaces old file while keeping settings
-	if config.get_value("DEBUG", "VERSION") != globals.VERSION:
-		var old_config := ConfigFile.new()
-		 
-		##loads old config settings
-		for i in config.get_sections():
-			for j in config.get_section_keys(i):
-				old_config.set_value(i, j, config.get_value(i, j))
-				
-		create_settings()
+	#if str(config.get_value("DEBUG", "VERSION")) != globals.VERSION:
+		#print("Version mismatch detected, rewriting CONFIG file.")
 		
-		##reloads setting from old config
-		for i in old_config.get_sections():
+	##to save from config file corruption or 
+	print("Creating new CONFIG file")
+	var old_config := ConfigFile.new()
+	 
+	##loads old config settings
+	for i in config.get_sections():
+		for j in config.get_section_keys(i):
+			old_config.set_value(i, j, config.get_value(i, j))
+		config.erase_section(i)
+	
+	create_settings()
+	
+	print("Reloading old settings...")
+	##reloads setting from old config
+	for i in old_config.get_sections():
+		if i != "DEBUG":
 			for j in old_config.get_section_keys(i):
 				config.set_value(i, j, old_config.get_value(i, j))
-				
-	config.save(CONFIG_PATH)
+	
+	print ("CONFIG file rewritten!")
+	
+	save()
 	
 	colors = load_settings("Colors")
 	measures = load_settings("Measures")
 	others =  load_settings("Others")
 	gui_colors = load_settings("GUI_Colors")
 
+func save():
+	var save_check = config.save(CONFIG_PATH)
+	if save_check == OK:
+		print("CONFIG file saved succesfully!")
+	else:
+		print(save_check)
+
 ##default settings
 func create_settings():
-	config.set_value("DEBUG", "VERSION", 2.0)
+	print("Creating default setting...")
+	
+	config.set_value("DEBUG", "VERSION", globals.VERSION)
 	
 	config.set_value("GUI_Colors", "WINDOW_BG", Color(0.282353, 0.239216, 0.545098, 1))
 	config.set_value("GUI_Colors", "WINDOW_TEXT", Color(0.878431, 1, 1, 1))
@@ -55,21 +74,21 @@ func create_settings():
 	config.set_value("Colors", "STATS_LINES_COLOR", Color.NAVY_BLUE)
 	
 	config.set_value("Measures", "R", 250)
-	config.set_value("Measures", "CENTER", Vector2(400, 400))
-	config.set_value("Measures", "IMG_SIZE", Vector2(800, 800))
+	config.set_value("Measures", "CENTER", Vector2i(400, 400))
+	config.set_value("Measures", "IMG_SIZE", Vector2i(800, 800))
 	config.set_value("Measures", "LABELS_DISTANCE", 10)
-	config.set_value("Measures", "AVG_POSITION", Vector2(800 - 75, 800 - 90) )
+	config.set_value("Measures", "AVG_POSITION", Vector2i(800 - 75, 800 - 90) )
 	config.set_value("Measures", "LABELS_FONT_SIZE", 50)
 	
 	config.set_value("Others", "VALUE_SCALE", 10)
 	config.set_value("Others", "STARTING_N", 6)
 	config.set_value("Others", "AA", true) 
 	config.set_value("Others", "OUTPUT_PATH", "output/")
-	config.set_value("Others", "IMG_SCALE", 1)
+	config.set_value("Others", "IMG_SCALE", 100)
 	config.set_value("Others", "SCALING_ON", true)
 	config.set_value("Others", "CENTER_AT_CENTER", true)
 	config.set_value("Others", "AUTO_AVG", true)
-	config.set_value("Others", "DIVISIONS", 5)
+	config.set_value("Others", "DIVISIONS", 4)
 	
 	
 ##updates config file with single key
@@ -86,7 +105,7 @@ func save_settings(section: String, key: String, value):
 		config.set_value("Measures", "AVG_POSITION", position)
 		measures["AVG_POSITION"] = position
 		
-	config.save(CONFIG_PATH)
+	save()
 
 func load_settings(section :String) -> Dictionary:
 	var settings := {}
